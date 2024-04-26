@@ -4,6 +4,8 @@
  */
 package com.mycompany.playlistmusicale;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Studente
@@ -11,16 +13,35 @@ package com.mycompany.playlistmusicale;
 public class Canzone 
 {
     private String titolo;
-    private String autore;
-    private int idCanzone;
+    private String artista;
+    private long idCanzone;
     private String durata;
+    private String genere;
+    private LocalDate dataUscita;
+    private static long nextID = 1;
+    
 
-    public Canzone(String titolo, String autore, int idCanzone, String durata) 
+    public Canzone(String titolo, String artista, String durata, String genere, LocalDate dataUscita) 
     {
+        this.idCanzone = nextID;
+        nextID++;
         this.titolo = titolo;
-        this.autore = autore;
-        this.idCanzone = idCanzone;
+        this.artista = artista;
         this.durata = durata;
+        this.genere = genere;
+        this.dataUscita = dataUscita;
+        
+    }
+    
+    public Canzone(Canzone canz)
+    {
+        this.idCanzone= nextID;
+        nextID++;
+        this.titolo = canz.getTitolo();
+        this.artista = canz.getArtista();
+        this.durata = canz.getDurata();
+        this.genere = canz.getGenere();
+        this.dataUscita = canz.getDataUscita();
     }
     
     
@@ -35,26 +56,21 @@ public class Canzone
         this.titolo = titolo;
     }
 
-    public String getAutore() 
+    public String getArtista() 
     {
-        return autore;
+        return artista;
     }
 
-    public void setAutore(String autore) 
+    public void setArtista(String artista) 
     {
-        this.autore = autore;
+        this.artista = artista;
     }
 
-    public int getIdCanzone() 
+    public long getIdCanzone() 
     {
         return idCanzone;
     }
-
-    public void setIdCanzone(int idCanzone) 
-    {
-        this.idCanzone = idCanzone;
-    }
-
+    
     public String getDurata() 
     {
         return durata;
@@ -64,6 +80,37 @@ public class Canzone
     {
         this.durata = durata;
     }
+
+    public String getGenere() 
+    {
+        return genere;
+    }
+
+    public void setGenere(String genere) 
+    {
+        
+        this.genere = genere;
+    }
+
+    public LocalDate getDataUscita() 
+    {
+        return dataUscita;
+    }
+
+    public void setDataUscita(LocalDate dataUscita) 
+    {
+        this.dataUscita = dataUscita;
+    }
+    
+    
+    
+    public String toString()
+    {
+        String s = "Id: "+getIdCanzone()+";"+"\n"+"Titolo: "+getTitolo()+";"+"\n"+"Artista: "+getArtista()+";"+"\n"+"Genere: "+getGenere()+"\n"+"Durata: "+getDurata()+";"+"\n"+"Data di rilascio: "+getDataUscita()+"\n";
+        return s;
+    }
+  
+    
     
     
     

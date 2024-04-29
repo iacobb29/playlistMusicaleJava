@@ -65,4 +65,30 @@ public class Playlist
         return contatore;
     }
     
+    public void rimuoviTraccia(int posizione) throws EccezionePosNonValida, EccezionePosVuota
+    {
+        if(posizione<0 || posizione>NUM_MAX_TRACCE)
+            throw new EccezionePosNonValida();
+ 
+        if (tracce[posizione]==null)
+                throw new EccezionePosVuota();
+        
+        tracce[posizione] = null;
+    }
+    
+    public String toString()
+    {
+        String s="";
+        for(int i=0;i<NUM_MAX_TRACCE;i++)
+        {
+            if (tracce[i]==null)
+                s+=i+"-->\n";
+            else
+                s+=i+"-->\t"+tracce[i].toString()+"\n";
+        }
+        
+        return s;
+    }
+            
+    
 }

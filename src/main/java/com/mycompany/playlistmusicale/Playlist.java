@@ -8,7 +8,15 @@ import eccezioni.EccezionePosNonValida;
 import eccezioni.EccezionePosOccupata;
 import eccezioni.EccezionePosVuota;
 import eccezioni.FileException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utilita.TextFile;
 
 /**
@@ -147,12 +155,103 @@ public class Playlist
         return canzoniTitolo;
     }
     
-    
-   
+    public void esportaCSV(String nomeFile) throws IOException
+    {
+        TextFile f1;
+        Canzone canz;
         
+        f1 = new TextFile(nomeFile, 'W');
+        String datiTraccia;
+        for(int i=0;i<this.getNumMaxTracce();i++)
+        {
+            try 
+            {
+                canz = this.getCanzone(i);
+                datiTraccia = i+";"+canz.getTitolo()+";"+canz.getArtista()+";"+canz.getGenere()+";"+canz.getDataUscita();
+                f1.toFile(datiTraccia);
+            } 
+            catch (EccezionePosNonValida ex) 
+            {
+                //Non succederà mai
+            } 
+            catch (EccezionePosVuota ex) 
+            {
+                //Non fare nulla, vai alla prossima posizione
+            } 
+            catch (FileException ex) 
+            {
+                //Non succederà mai
+            }
+        }
+        f1.closeFile();
+        System.out.println("Esportazione avvenuta correttamente");
+        
+    }
     
-
+    public void importaDaCSV(String nomeFile) throws IOException
+    {
+        String rigaLetta;
+        String[] datiTraccia;
+        TextFile f1;
+        String titolo, artista, durata, genere;
+        LocalDate dataUscita;
+        Canzone canz;
+        int posizione;
+        
+        f1 = new TextFile(nomeFile, 'R');
+        do
+        {
+            try
+            {
+                rigaLetta = f1.fromFile();
+                datiTraccia = rigaLetta.split(";");
+                posizione = Integer.parseInt(datiTraccia[0]);
+                titolo = datiTraccia[1];
+                artista = datiTraccia[2];
+                genere = datiTraccia[3];
+                canz = new Canzone(titolo, artista, durata, genere, dataUscita);
+                
+                try 
+                {
+                    this.setCanzone(canz, posizione);
+                } 
+                catch (EccezionePosNonValida ex) 
+                {
+                    //Non succederà mai
+                } 
+                catch (EccezionePosOccupata ex) 
+                {
+                    //Non succederà mai
+                }
+            }
+            
+            catch(FileException ex)
+            {
+                f1.closeFile();
+                break;
+            }
+            }while(true);
+            
+        }
     
+    public void salvaDati(String nomeFile) throws FileNotFoundException, IOException
+    {
+        ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream (nomeFile));
+        writer.writeObject(this);
+        writer.flush();
+        writer.close();
+    }
+    
+    public Playlist caricaDati(String nomeFile) throws FileNotFoundException, IOException, ClassNotFoundException
+    {
+        Playlist p1;
+        ObjectInputStream reader = new ObjectInputStream(new FileInputStream(nomeFile));
+        p1 = (Playlist)reader.readObject();
+        reader.close();
+        return p1;
+    }
+    
+          
     
     
     public String toString()

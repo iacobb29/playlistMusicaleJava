@@ -7,6 +7,9 @@ package com.mycompany.playlistmusicale;
 import eccezioni.EccezionePosNonValida;
 import eccezioni.EccezionePosOccupata;
 import eccezioni.EccezionePosVuota;
+import eccezioni.FileException;
+import java.io.IOException;
+import utilita.TextFile;
 
 /**
  *
@@ -75,6 +78,82 @@ public class Playlist
         
         tracce[posizione] = null;
     }
+    
+    public Canzone[] cercaCanzoniArtista(String artista) 
+    {
+        
+        Canzone[] canzoniArtista = new Canzone[NUM_MAX_TRACCE];
+        int contatore = 0;
+
+        for (int i = 0; i < NUM_MAX_TRACCE; i++) 
+        {
+            if (tracce[i] != null && tracce[i].getArtista().equalsIgnoreCase(artista)) 
+            {
+                canzoniArtista[contatore] = tracce[i];
+                contatore++;
+            }
+            else if(contatore == 0)
+            {
+                return null;
+            }
+        }
+        return canzoniArtista;
+    }
+    
+    public Canzone[] cercaCanzoniGenere(String genere) 
+    {
+        
+        Canzone[] canzoniGenere = new Canzone[NUM_MAX_TRACCE];
+        int contatore = 0;
+
+        for (int i = 0; i < NUM_MAX_TRACCE; i++) 
+        {
+            if (tracce[i] != null && tracce[i].getGenere().equalsIgnoreCase(genere)) 
+            {
+                canzoniGenere[contatore] = tracce[i];
+                contatore++;
+            }
+            
+            else if(contatore == 0)
+            {
+                return null;
+            }
+                
+        }
+        return canzoniGenere;
+    }
+    
+    public Canzone[] cercaCanzoniTitolo(String titolo) 
+    {
+        
+        Canzone[] canzoniTitolo = new Canzone[NUM_MAX_TRACCE];
+        int contatore = 0;
+
+        for (int i = 0; i < NUM_MAX_TRACCE; i++) 
+        {
+            if (tracce[i] != null && tracce[i].getTitolo().equalsIgnoreCase(titolo)) 
+            {
+                canzoniTitolo[contatore] = tracce[i];
+                contatore++;
+            }
+            
+            else if(contatore == 0)
+            {
+                return null;
+            }
+        
+        
+        }
+        return canzoniTitolo;
+    }
+    
+    
+   
+        
+    
+
+    
+    
     
     public String toString()
     {

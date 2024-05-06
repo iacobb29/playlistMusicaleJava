@@ -167,7 +167,7 @@ public class Playlist
             try 
             {
                 canz = this.getCanzone(i);
-                datiTraccia = i+";"+canz.getTitolo()+";"+canz.getArtista()+";"+canz.getGenere()+";"+canz.getDataUscita();
+                datiTraccia = i+";"+canz.getIdCanzone()+";"+canz.getTitolo()+";"+canz.getArtista()+";"+canz.getGenere()+";"+canz.getDataUscita();
                 f1.toFile(datiTraccia);
             } 
             catch (EccezionePosNonValida ex) 
@@ -193,7 +193,9 @@ public class Playlist
         String rigaLetta;
         String[] datiTraccia;
         TextFile f1;
-        String titolo, artista, durata, genere;
+        String titolo, artista, genere;
+        String durata;
+        long idCanzone;
         LocalDate dataUscita;
         Canzone canz;
         int posizione;
@@ -209,6 +211,8 @@ public class Playlist
                 titolo = datiTraccia[1];
                 artista = datiTraccia[2];
                 genere = datiTraccia[3];
+                durata = datiTraccia[4];
+                dataUscita = LocalDate.parse(datiTraccia[5]);
                 canz = new Canzone(titolo, artista, durata, genere, dataUscita);
                 
                 try 
@@ -251,6 +255,27 @@ public class Playlist
         return p1;
     }
     
+    
+    public void modifica(int posizione, String nuovoTitolo, String nuovoArtista, String nuovoGenere, String nuovaDurata, LocalDate nuovaDataUscita) throws EccezionePosNonValida, EccezionePosVuota 
+    {
+        if (posizione < 0 || posizione >= NUM_MAX_TRACCE) 
+        {
+            throw new EccezionePosNonValida();
+        }
+    
+        if (tracce[posizione] == null) 
+        {
+            throw new EccezionePosVuota();
+        }
+    
+    Canzone canzoneDaModificare = tracce[posizione];
+    canzoneDaModificare.setTitolo(nuovoTitolo);
+    canzoneDaModificare.setArtista(nuovoArtista);
+    canzoneDaModificare.setGenere(nuovoGenere);
+    canzoneDaModificare.setDurata(nuovaDurata);
+    canzoneDaModificare.setDataUscita(nuovaDataUscita);
+}
+
           
     
     

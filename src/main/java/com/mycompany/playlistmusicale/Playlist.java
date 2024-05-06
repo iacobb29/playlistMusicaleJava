@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,7 @@ import utilita.TextFile;
  *
  * @author Studente
  */
-public class Playlist 
+public class Playlist implements Serializable
 {
     private final static int NUM_MAX_TRACCE = 10;
     private Canzone[] tracce;

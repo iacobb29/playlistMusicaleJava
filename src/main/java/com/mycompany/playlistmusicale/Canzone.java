@@ -7,7 +7,7 @@ package com.mycompany.playlistmusicale;
 import java.time.LocalDate;
 
 /**
- *
+ *Rappresenta una canzone
  * @author Studente
  */
 public class Canzone 
@@ -21,6 +21,14 @@ public class Canzone
     private static long nextID = 1;
     
 
+    /**
+     * Classe costruttore della canzone
+     * @param titolo Titolo della canzone
+     * @param artista Nome dell'artista
+     * @param durata Durata della canzone
+     * @param genere Genere della canzone
+     * @param dataUscita Data di rilascio della canzone
+     */
     public Canzone(String titolo, String artista, String durata, String genere, LocalDate dataUscita) 
     {
         this.idCanzone = nextID;
@@ -33,6 +41,10 @@ public class Canzone
         
     }
     
+    /**
+     * Costruttore di copia
+     * @param canz 
+     */
     public Canzone(Canzone canz)
     {
         this.idCanzone= canz.idCanzone;
@@ -102,7 +114,10 @@ public class Canzone
     }
     
     
-    
+    /**
+     * Restituisce una stringa che contiene i dati di una canzone
+     * @return 
+     */
     public String toString()
     {
         String s = "Id: "+getIdCanzone()+";"+"\n"+"Titolo: "+getTitolo()+";"+"\n"+"Artista: "+getArtista()+";"+"\n"+"Genere: "+getGenere()+"\n"+"Durata: "+getDurata()+";"+"\n"+"Data di rilascio: "+getDataUscita()+"\n";

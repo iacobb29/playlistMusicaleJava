@@ -21,7 +21,8 @@ import java.util.logging.Logger;
 import utilita.TextFile;
 
 /**
- *
+ * Classe che rappresenta una playlist,
+ * ovvero un array di canzoni
  * @author Studente
  */
 public class Playlist implements Serializable
@@ -29,11 +30,22 @@ public class Playlist implements Serializable
     private final static int NUM_MAX_TRACCE = 10;
     private Canzone[] tracce;
     
+    /**
+     * Costruttore della playlist
+     */
     public Playlist()
     {
         tracce = new Canzone[NUM_MAX_TRACCE];
     }
     
+    /**
+     * Inserisce la canzone nella posizione "posizione"
+     * della playlist "Playlist"
+     * @param traccia Una canzone dell'array Playlist
+     * @param posizione posizione della canzone nell'array
+     * @throws EccezionePosNonValida
+     * @throws EccezionePosOccupata 
+     */
     public void setCanzone(Canzone traccia, int posizione) throws EccezionePosNonValida, EccezionePosOccupata
     {
         if(posizione<0 || posizione>NUM_MAX_TRACCE)
@@ -45,6 +57,15 @@ public class Playlist implements Serializable
         tracce[posizione] = traccia;
     }
     
+    /**
+     * Restituisce la traccia in posizione "posizione"
+     * della playlist "playlist"
+     * @param posizione posizione della canzone nell'array 
+     * @return restituisce l'oggetto della canzone, altrimenti un messaggio di errore
+     * in caso la posizione inserita sia vuota o on valida
+     * @throws EccezionePosNonValida
+     * @throws EccezionePosVuota 
+     */
     public Canzone getCanzone(int posizione) throws EccezionePosNonValida, EccezionePosVuota
     {
         Canzone canz;
@@ -60,12 +81,21 @@ public class Playlist implements Serializable
     }
             
             
-    
+    /**
+     * Restituisce il numero massimo di tracce
+     * che possono essere aggiunte alla playlist
+     * @return  
+     */
     public int getNumMaxTracce()
     {
         return NUM_MAX_TRACCE;
     }
     
+    /**
+     * Restituisce il numero di tracce
+     * presenti nella playlist
+     * @return 
+     */
     public int getNumTracce()
     {
         int contatore=0;
@@ -77,6 +107,14 @@ public class Playlist implements Serializable
         return contatore;
     }
     
+    /**
+     * Rimuove dalla playlist la traccia
+     * in posizione "posizione"
+     * @param posizione la posizione della traccia che si vuole
+     * rimuovere
+     * @throws EccezionePosNonValida
+     * @throws EccezionePosVuota 
+     */
     public void rimuoviTraccia(int posizione) throws EccezionePosNonValida, EccezionePosVuota
     {
         if(posizione<0 || posizione>NUM_MAX_TRACCE)
@@ -88,13 +126,20 @@ public class Playlist implements Serializable
         tracce[posizione] = null;
     }
     
+    
+    /**
+     * Resituisce un array di stringhe contenente tutte le canzoni
+     * corrispondenti all'artista inserito
+     * @param artistaDaCercare l'artista di cui si vuole vedere tutte le canzoni
+     * @return 
+     */
     public String[] elencoCanzoniArtista (String artistaDaCercare)
     {
         int contaCanzoniArtista=0;
         Canzone canz;
         String[] elencoCanzoniArtista;
         
-        for(int i=0;i<getNumTracce();i++)
+        for(int i=0;i<NUM_MAX_TRACCE;i++)
         {
             
                 try 
@@ -119,7 +164,7 @@ public class Playlist implements Serializable
         elencoCanzoniArtista = new String[contaCanzoniArtista];
         
         contaCanzoniArtista=0; 
-        for(int i=0;i<getNumTracce();i++)
+        for(int i=0;i<NUM_MAX_TRACCE;i++)
         {
             
                 try 
@@ -144,13 +189,19 @@ public class Playlist implements Serializable
         return elencoCanzoniArtista;
     }
     
+    /**
+     * Restituisce un array di stringhe contenente tutte le canzoni
+     * corrispondenti al titolo inserito
+     * @param titoloDaCercare il titolo della canzone che si vuole cercare
+     * @return 
+     */
     public String[] elencoCanzoniTitolo (String titoloDaCercare)
     {
         int contaCanzoniTitolo=0;
         Canzone canz;
         String[] elencoCanzoniTitolo;
         
-        for(int i=0;i<getNumTracce();i++)
+        for(int i=0;i<NUM_MAX_TRACCE;i++)
         {
             
                 try 
@@ -175,7 +226,7 @@ public class Playlist implements Serializable
         elencoCanzoniTitolo = new String[contaCanzoniTitolo];
         
         contaCanzoniTitolo=0; 
-        for(int i=0;i<getNumTracce();i++)
+        for(int i=0;i<NUM_MAX_TRACCE;i++)
         {
             
                 try 
@@ -200,13 +251,19 @@ public class Playlist implements Serializable
         return elencoCanzoniTitolo;
     }
     
+    /**
+     * Restituisce un array di stringhe contenente tutte le canzoni corrispondenti
+     * al genere inserito
+     * @param genereDaCercare il genere le cui canzoni si vuole trovare
+     * @return 
+     */
     public String[] elencoCanzoniGenere (String genereDaCercare)
     {
         int contaCanzoniGenere=0;
         Canzone canz;
         String[] elencoCanzoniGenere;
         
-        for(int i=0;i<getNumTracce();i++)
+        for(int i=0;i<NUM_MAX_TRACCE;i++)
         {
             
                 try 
@@ -231,7 +288,7 @@ public class Playlist implements Serializable
         elencoCanzoniGenere = new String[contaCanzoniGenere];
         
         contaCanzoniGenere=0; 
-        for(int i=0;i<getNumTracce();i++)
+        for(int i=0;i<NUM_MAX_TRACCE;i++)
         {
             
                 try 
@@ -256,6 +313,12 @@ public class Playlist implements Serializable
         return elencoCanzoniGenere;
     }
     
+    /**
+     * Esporta su un file CSV il contenuto dell'array Playlist
+     * @param nomeFile il nome del file csv su cui verranno salvate
+     * le informazioni
+     * @throws IOException 
+     */
     public void esportaCSV(String nomeFile) throws IOException
     {
         TextFile f1;
@@ -289,6 +352,13 @@ public class Playlist implements Serializable
         
     }
     
+    /**
+     * Importa da un file CSV le informazioni sulle canzoni e le carica
+     * nell'array playlist
+     * @param nomeFile nome del file CSV dal quale verranno caricate
+     * le informazioni
+     * @throws IOException 
+     */
     public void importaDaCSV(String nomeFile) throws IOException
     {
         String rigaLetta;
@@ -339,6 +409,12 @@ public class Playlist implements Serializable
             
         }
     
+    /**
+     * Salva su un file binario il contenuto dell'array playlist
+     * @param nomeFile nome del file binario su cui verranno salvate le informazioni
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void salvaDati(String nomeFile) throws FileNotFoundException, IOException
     {
         ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream (nomeFile));
@@ -347,6 +423,15 @@ public class Playlist implements Serializable
         writer.close();
     }
     
+    /**
+     * Carica da un file binario le informazioni della playlist
+     * @param nomeFile nome del file binario dal quale verranno caricate
+     * le informazioni
+     * @return la playlist
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public Playlist caricaDati(String nomeFile) throws FileNotFoundException, IOException, ClassNotFoundException
     {
         Playlist p1;
@@ -356,30 +441,70 @@ public class Playlist implements Serializable
         return p1;
     }
     
-    
-    public void modifica(int posizione, String nuovoTitolo, String nuovoArtista, String nuovoGenere, String nuovaDurata, LocalDate nuovaDataUscita) throws EccezionePosNonValida, EccezionePosVuota 
+    /**
+     * Modifica il titolo di una canzone in posizione "posizione"
+     * @param posizione posizione della canzone di cui si vuole modificare il titolo
+     * @param nuovoNome nuovo titolo che si vuole dare alla canzone
+     * @throws EccezionePosNonValida
+     * @throws EccezionePosVuota 
+     */
+    public void modificaCanzoneNome(int posizione, String nuovoNome) throws EccezionePosNonValida, EccezionePosVuota 
     {
-        if (posizione < 0 || posizione >= NUM_MAX_TRACCE) 
-        {
-            throw new EccezionePosNonValida();
-        }
     
-        if (tracce[posizione] == null) 
-        {
-            throw new EccezionePosVuota();
-        }
+    if (posizione < 0 || posizione >= NUM_MAX_TRACCE) 
+    {
+        throw new EccezionePosNonValida();
+    }
     
-    Canzone canzoneDaModificare = tracce[posizione];
-    canzoneDaModificare.setTitolo(nuovoTitolo);
-    canzoneDaModificare.setArtista(nuovoArtista);
-    canzoneDaModificare.setGenere(nuovoGenere);
-    canzoneDaModificare.setDurata(nuovaDurata);
-    canzoneDaModificare.setDataUscita(nuovaDataUscita);
-}
+    
+    if (tracce[posizione] == null) 
+    {
+        throw new EccezionePosVuota();
+    }
+    
+   
+        tracce[posizione].setTitolo(nuovoNome);
+        System.out.println("Il titolo della canzone è stato modificato correttamente.");
+    }
+    
+    /**
+     * Modifica l'artista di una canzone in posizione "posizione"
+     * @param posizione posizione della canzone di cui si vuole modificare l'artista
+     * @param nuovoArtista nome del nuovo artista da assegnare alla canzone
+     * @throws EccezionePosNonValida
+     * @throws EccezionePosVuota 
+     */
+    public void modificaCanzoneArtista(int posizione, String nuovoArtista) throws EccezionePosNonValida, EccezionePosVuota 
+    {
+   
+    if (posizione < 0 || posizione >= NUM_MAX_TRACCE) 
+    {
+        throw new EccezionePosNonValida();
+    }
+    
+    
+    if (tracce[posizione] == null) 
+    {
+        throw new EccezionePosVuota();
+    }
+    
+        Canzone canzoneDaModificare = tracce[posizione];
+        canzoneDaModificare.setArtista(nuovoArtista);
+    }
+
+
+    
+    
+    
 
           
     
     
+    /**
+     * Restituisce una stringa contenente
+     * i dati della playlist
+     * @return 
+     */
     public String toString()
     {
         String s="";

@@ -29,7 +29,7 @@ public class App
        
         Playlist p1= new Playlist();
         
-        int numeroVociMenu=12;
+        int numeroVociMenu=13;
         String[] vociMenu=new String[numeroVociMenu];
         int voceMenuScelta;
         Menu menu;
@@ -58,6 +58,7 @@ public class App
         vociMenu[9]="9 -->\tImporta tracce dal file CSV";
         vociMenu[10]="10 -->\tSalva dati playlist";
         vociMenu[11]="11 -->\tCarica dati playlist";
+        vociMenu[12]="12 -->\tModifica una canzone";
         
         menu=new Menu(vociMenu);
         
@@ -77,20 +78,20 @@ public class App
                 case 2:
                     try
                     {
-                        System.out.println("Titolo --> ");
+                        System.out.print("Titolo --> ");
                         titolo=tastiera.readString();
-                        System.out.println("Artista --> ");
+                        System.out.print("Artista --> ");
                         artista = tastiera.readString();
-                        System.out.println("Genere --> ");
+                        System.out.print("Genere --> ");
                         genere = tastiera.readString();
-                        System.out.println("Durata --> ");
+                        System.out.print("Durata --> ");
                         durata = tastiera.readString();
                         
                         do
                         {
                             try
                             {
-                               System.out.println("Posizione --> ");
+                               System.out.print("Posizione --> ");
                                posizione = tastiera.readInt(); 
                                break;
                             }
@@ -104,7 +105,7 @@ public class App
                         {
                             try
                             {
-                                System.out.println("Data di rilascio --> ");
+                                System.out.print("Data di rilascio --> ");
                                 dataUscita = LocalDate.parse(tastiera.readString());
                                 break;
                             }
@@ -144,7 +145,7 @@ public class App
                         {
                             try
                             {
-                                System.out.println("Posizione --> ");
+                                System.out.print("Posizione --> ");
                                 posizione=tastiera.readInt();
                                 break;
                             }
@@ -178,7 +179,7 @@ public class App
                         {
                             try
                             {
-                                System.out.println("Posizione --> ");
+                                System.out.print("Posizione --> ");
                                 posizione=tastiera.readInt();
                                 break;
                             }
@@ -207,7 +208,7 @@ public class App
                 case 5:
                     try
                     {
-                        System.out.println("Titolo --> ");
+                        System.out.print("Titolo --> ");
                         titolo=tastiera.readString();
                         elencoCanzoniTitolo=p1.elencoCanzoniTitolo(titolo);
                         if (elencoCanzoniTitolo!=null)
@@ -229,7 +230,7 @@ public class App
                 case 6:
                     try
                     {
-                        System.out.println("Artista --> ");
+                        System.out.print("Artista --> ");
                         artista=tastiera.readString();
                         elencoCanzoniArtista=p1.elencoCanzoniArtista(artista);
                         if (elencoCanzoniArtista!=null)
@@ -251,7 +252,7 @@ public class App
                 case 7:
                     try
                     {
-                        System.out.println("Genere --> ");
+                        System.out.print("Genere --> ");
                         genere=tastiera.readString();
                         elencoCanzoniGenere=p1.elencoCanzoniGenere(genere);
                         if (elencoCanzoniGenere!=null)
@@ -330,6 +331,61 @@ public class App
                         System.out.println("Impossibile leggere il dato memorizzato");
                     }
                     break;
+                    
+                case 12: 
+                    try 
+                    {
+                     System.out.print("Posizione della canzone da modificare --> ");
+                     posizione = tastiera.readInt();
+
+                     System.out.println("Vuoi modificare:");
+                     System.out.println("1. Titolo");
+                     System.out.println("2. Artista");
+                     int sceltaModifica = tastiera.readInt();
+
+                     switch (sceltaModifica) 
+                    {
+                        case 1:
+                            System.out.print("Nuovo titolo --> ");
+                            String nuovoTitolo = tastiera.readString();
+
+                            p1.modificaCanzoneNome(posizione, nuovoTitolo);
+                            System.out.println("Il titolo della canzone è stato modificato correttamente.");
+                            break;
+
+                        case 2:
+                            System.out.print("Nuovo artista --> ");
+                            String nuovoArtista = tastiera.readString();
+
+                            p1.modificaCanzoneArtista(posizione, nuovoArtista);
+                            System.out.println("L'artista della canzone è stato modificato correttamente.");
+                            break;
+
+                        default:
+                            System.out.println("Scelta non valida.");
+                            break;
+                    }
+                    }    
+                    catch (IOException e) 
+                    {
+                        System.out.println("Errore: impossibile leggere da tastiera");
+                    } 
+                    catch (EccezionePosNonValida e) 
+                    {
+                        System.out.println("Posizione non valida");
+                    } 
+                    catch (EccezionePosVuota e)
+                    {
+                        System.out.println("Nessuna canzone presente in quella posizione!");
+                    }
+            break;
+
+                    
+                
+                    
+                    
+                
+
                     
             
             }

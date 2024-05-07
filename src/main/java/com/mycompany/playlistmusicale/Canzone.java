@@ -120,7 +120,7 @@ public class Canzone
      */
     public String toString()
     {
-        String s = "Id: "+getIdCanzone()+";"+"\n"+"Titolo: "+getTitolo()+";"+"\n"+"Artista: "+getArtista()+";"+"\n"+"Genere: "+getGenere()+"\n"+"Durata: "+getDurata()+";"+"\n"+"Data di rilascio: "+getDataUscita()+"\n";
+        String s = "Id: "+getIdCanzone()+";"+"\n"+"Titolo: "+getTitolo()+";"+"\n"+"Artista: "+getArtista()+";"+"\n"+"Genere: "+getGenere()+";"+"\n"+"Durata: "+getDurata()+";"+"\n"+"Data di rilascio: "+getDataUscita()+"\n";
         return s;
     }
   

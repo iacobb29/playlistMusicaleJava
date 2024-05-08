@@ -29,7 +29,7 @@ import utilita.TextFile;
 public class Playlist implements Serializable
 {
     private final static int NUM_MAX_TRACCE = 10;
-    private Canzone[] tracce;
+    Canzone[] tracce;
     
     /**
      * Costruttore della playlist

@@ -4,6 +4,7 @@
 
 package com.mycompany.playlistmusicale;
 
+import eccezioni.EccezioneCanzoneNonTrovata;
 import eccezioni.EccezionePosNonValida;
 import eccezioni.EccezionePosOccupata;
 import eccezioni.EccezionePosVuota;
@@ -24,7 +25,7 @@ import utilita.TextFile;
 public class App 
 {
 
-    public static void main(String[] args) 
+    public static void main(String[] args)  
     {
        
         Playlist p1= new Playlist();
@@ -199,11 +200,13 @@ public class App
                         {
                             System.out.println("Posizione non valida");
                         } 
-                        catch (EccezionePosVuota ex) 
+                        catch (EccezioneCanzoneNonTrovata ex)
                         {
-                            System.out.println("La posizione è già vuota. Nessuna traccia è stata rimossa");
+                            System.out.println("Non è stata trovata nessuna canzone in quella posizione");
                         }
                     break;
+
+
                     
                 case 5:
                     try

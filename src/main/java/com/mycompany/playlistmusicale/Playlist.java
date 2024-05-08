@@ -4,6 +4,7 @@
  */
 package com.mycompany.playlistmusicale;
 
+import eccezioni.EccezioneCanzoneNonTrovata;
 import eccezioni.EccezionePosNonValida;
 import eccezioni.EccezionePosOccupata;
 import eccezioni.EccezionePosVuota;
@@ -113,15 +114,15 @@ public class Playlist implements Serializable
      * @param posizione la posizione della traccia che si vuole
      * rimuovere
      * @throws EccezionePosNonValida
-     * @throws EccezionePosVuota 
+     * @throws eccezioni.EccezioneCanzoneNonTrovata 
      */
-    public void rimuoviTraccia(int posizione) throws EccezionePosNonValida, EccezionePosVuota
+    public void rimuoviTraccia(int posizione) throws EccezionePosNonValida, EccezioneCanzoneNonTrovata
     {
         if(posizione<0 || posizione>NUM_MAX_TRACCE)
             throw new EccezionePosNonValida();
  
         if (tracce[posizione]==null)
-                throw new EccezionePosVuota();
+                throw new EccezioneCanzoneNonTrovata();
         
         tracce[posizione] = null;
     }

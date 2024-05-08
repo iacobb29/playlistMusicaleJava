@@ -18,7 +18,8 @@ public class CanzoneTest
     private Canzone canzone;
 
     @BeforeEach
-    public void setup() {
+    public void setup() 
+    {
         // Prima di ogni test, creiamo un'istanza di Canzone con dati validi
         canzone = new Canzone("Title 1", "Artist 1", "3:45", "Pop", LocalDate.of(2022, 1, 1));
     }

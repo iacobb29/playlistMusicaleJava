@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>970</y>
+      <w>530</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>Canzone
+--
+-Titolo: String
+-Artista: String;
+-idCanzone: Long
+-Durata: String
+-Genere: String
+-LocalDate: dataUscita
+-nextID: long = 1
+--
++Canzone(titolo: String, artista: String, durata: String, genere: String,
+dataUscita: LocalDate)
++Canzone(canz: Canzone)
++getTitolo(): String
++getAutore(): String
++getGenere(): String
++getDurata(): String
++getDataUscita(): LocalDate
++getIdCanzone(): long
++setTitolo(titolo: String)
++setArtista(artista: String)
++setGenere(genere: String)
++setDurata(durata: String)
++setDataUscita(dataUscita: LocalDate)
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>970</y>
+      <w>440</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>Playlist
+--
+-NUM_MAX_TRACCE: int = 10;
+--
++Playlist()
++setCanzone(canz: Canzone)
++getCanzone(posizione: int)
++getNumMaxTracce(): int
++getNumTracce(): int
++rimuoviTraccia(posizione: int)
++elencoCanzoniArtista(artistaDaCercare: String)
++elencoCanzoniTitolo(titoloDaCercare: String)
++elencoCanzoniGenere(genereDaCercare: String)
++esportaCSV(nomeFile: String)
++importaDaCSV(nomeFile: String)
++salvaDati(nomeFile: String)
++caricaDati(nomeFile: String)
++modificaCanzoneNome(posizione: int, nuovoNome: String)
++modificaCanzoneArtista(posizione: int, nuovoArtista: String)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>1110</y>
+      <w>410</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+Playlist: Canzone[ ]
+0.NUM_MAX_TRACCE
+</panel_attributes>
+    <additional_attributes>390.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>60</x>
+      <y>350</y>
+      <w>60</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Utente</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>360</x>
+      <y>0</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Aggiungere canzone
+alla playlist
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>400</x>
+      <y>80</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Visualizza tutte
+le canzoni
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>400</x>
+      <y>170</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Cerca una canzone 
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>390</x>
+      <y>230</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Rimuovi una canzone
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>400</x>
+      <y>290</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Cerca canzoni
+dal titolo
+bg=magenta</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>400</x>
+      <y>360</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Cerca canzoni
+dall'artista
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>400</x>
+      <y>430</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Cerca canzoni
+dal genere
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>380</x>
+      <y>490</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>esporta l'elenco
+delle canzoni
+su un file CSV
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>370</x>
+      <y>570</y>
+      <w>180</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Importa l'elenco delle
+canzoni da un file
+CSV
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>390</x>
+      <y>680</y>
+      <w>120</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Salva la playlist
+su un file binario
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>390</x>
+      <y>770</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>carica playlist
+da un file binario
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>30</y>
+      <w>300</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;360.0;280.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>100</y>
+      <w>340</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;290.0;320.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>180</y>
+      <w>340</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;210.0;320.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>240</y>
+      <w>330</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;150.0;310.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>310</y>
+      <w>340</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;80.0;320.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>370</y>
+      <w>340</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;320.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>380</y>
+      <w>340</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;320.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>380</y>
+      <w>320</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;300.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>380</y>
+      <w>320</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;300.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>380</y>
+      <w>330</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;310.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>380</y>
+      <w>330</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;310.0;420.0</additional_attributes>
+  </element>
+</diagram>
